@@ -11,43 +11,28 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserDetailServiceImpl implements UserDetailsService {
 
-//    private final IUserRepository userRepository;
     private final IUserAuthRepository userAuthRepository;
-    private final IUserMapper userMapper;
 
-    public UserDetailServiceImpl(IUserAuthRepository userAuthRepository, IUserMapper userMapper) {
+
+    public UserDetailServiceImpl(IUserAuthRepository userAuthRepository) {
         this.userAuthRepository = userAuthRepository;
-        this.userMapper = userMapper;
+
     }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-//        UserEntity user = userRepository.findByEmail(email);
-//        UserEntity user = userRepository
-//                .findByEmail(email);
-//        try {
-//            User user = userMapper.toUser(userRepository
-//                    .findByEmail(email));
-//
-//            return new UserDetailsImpl(user);
+        try{
             UserAuthEntity user = userAuthRepository.findOneByEmail(email);
-            if(user == null) {
-                throw new UsernameNotFoundException("USER NOT FOOOUND");
-            }
-
-
             return new UserDetailsImpl(user);
-//        } catch(UsernameNotFoundException e) {
-//                System.out.println("No user found");
-//                return null;
-//        }
+
+        } catch(UsernameNotFoundException e) {
+                return null;
+        }
+
     }
 
 //                .orElseThrow(() -> new UsernameNotFoundException("El usuario con email "+ email + " no existe"));
-
-
-
 
 
 }

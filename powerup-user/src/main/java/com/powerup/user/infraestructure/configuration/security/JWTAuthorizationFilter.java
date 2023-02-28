@@ -22,6 +22,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 
         String bearerToken = request.getHeader("Authorization");
 
+        // Validates if the Authorization contains Bearer in the header value
         if((bearerToken != null) && (bearerToken.startsWith("Bearer "))) {
             String token = bearerToken.replace("Bearer ", "");
             UsernamePasswordAuthenticationToken usernamePAT = JWTUtils.getAuthentication(token);
