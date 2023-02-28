@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/FirstService.iml" filepath="$PROJECT_DIR$/.idea/FirstService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/PowerUp.main.iml" filepath="$PROJECT_DIR$/.idea/modules/PowerUp.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.PowerUp.PowerUp.main.iml" filepath="$PROJECT_DIR$/.idea/modules/com.PowerUp.PowerUp.main.iml" />
+    </modules>
+  </component>
+</project>

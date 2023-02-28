@@ -1,0 +1,67 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.8'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id 'jacoco'
+}
+
+group = 'com.PowerUp'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	springBootVersion = "2.7.8"
+	mapstructVersion = "1.5.2.Final"
+	lombokVersion = "1.18.24"
+	lombokMapstructBindingVersion = "0.2.0"
+	openApiVersion = "1.6.11"
+}
+
+dependencies {
+	annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
+	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+	annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+	compileOnly "org.projectlombok:lombok:${lombokVersion}"
+
+	developmentOnly "org.springframework.boot:spring-boot-devtools:${springBootVersion}"
+	runtimeOnly 'org.postgresql:postgresql'
+	implementation "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
+	implementation "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+	implementation "org.springdoc:springdoc-openapi-ui:${openApiVersion}"
+	implementation "org.springdoc:springdoc-openapi-webflux-ui:${openApiVersion}"
+	implementation "org.springframework.security:spring-security-crypto" // encriptamiento
+	implementation 'org.hibernate.validator:hibernate-validator:6.2.0.Final'
+
+	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:3.1.4' // comsumir micro HTTP
+	implementation 'io.github.openfeign:feign-okhttp:9.2.0' // conexion micro
+	implementation "org.springframework.boot:spring-boot-starter-validation:${springBootVersion}"
+	implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+
+
+	testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
+
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	implementation 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+test {
+	finalizedBy jacocoTestReport
+}
