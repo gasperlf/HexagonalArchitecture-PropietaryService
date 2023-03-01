@@ -19,7 +19,7 @@ public class JWTUtils {
     private final static String ACCESS_TOKEN_SECRET = "4qhq8LrEBfYcaRHxhdb9zURb2r8e7Ud9875451231";
 
     // 30 days * 24 Hr * 3600 Secs - 30 days
-    private final static Long ACCESS_TOKEN_VALIDITY_SECONDS = 2_592_000L;
+    private final static Long ACCESS_TOKEN_VALIDITY_SECONDS = 600L;
 
     public static String createToken(String name, String email){
         Long expirationTime = ACCESS_TOKEN_VALIDITY_SECONDS * 1000;
