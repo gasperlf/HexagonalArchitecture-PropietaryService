@@ -24,4 +24,7 @@ public class UserAuthEntity {
     private String email;
 
     private String password;
+
+    @Column(name = "id_role")
+    private String idRole;
 }

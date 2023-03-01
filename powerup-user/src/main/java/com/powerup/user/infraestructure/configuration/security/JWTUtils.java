@@ -21,12 +21,13 @@ public class JWTUtils {
     // 30 days * 24 Hr * 3600 Secs - 30 days
     private final static Long ACCESS_TOKEN_VALIDITY_SECONDS = 600L;
 
-    public static String createToken(String name, String email){
+    public static String createToken(String name, String email, String role){
         Long expirationTime = ACCESS_TOKEN_VALIDITY_SECONDS * 1000;
         Date expirationDate = new Date(System.currentTimeMillis() + expirationTime);
 
         Map<String, Object> extra = new HashMap<>();
         extra.put("name", name);
+        extra.put("role", role);
 
 
         return Jwts.builder()

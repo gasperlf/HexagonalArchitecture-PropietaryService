@@ -9,9 +9,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
 
-/**
- * Receives an user
- * **/
 
 @AllArgsConstructor
 public class UserDetailsImpl implements UserDetails {
@@ -32,6 +29,8 @@ public class UserDetailsImpl implements UserDetails {
     public String getUsername() {
         return userAuthEntity.getEmail();
     }
+
+    public String getIdRole() {return userAuthEntity.getIdRole();}
 
     @Override
     public boolean isAccountNonExpired() {
