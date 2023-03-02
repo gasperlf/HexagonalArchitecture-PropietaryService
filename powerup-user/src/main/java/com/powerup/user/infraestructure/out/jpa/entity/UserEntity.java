@@ -7,6 +7,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+import static javax.persistence.GenerationType.SEQUENCE;
+
 
 @Entity
 @Table(name = "users")
@@ -15,7 +17,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 public class UserEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = SEQUENCE)
     @Id
     @Column(name = "id", nullable = false)
     private Long id;
@@ -30,7 +32,7 @@ public class UserEntity {
     @Column(name = "password", nullable = false)
     private String password;
     @JoinColumn(name = "id_role", nullable = false)
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch =
+    @ManyToOne(optional = false, cascade = CascadeType.MERGE, fetch =
     FetchType.EAGER)
     private RoleEntity role;
     @Column(name = "id_document", nullable = false)
