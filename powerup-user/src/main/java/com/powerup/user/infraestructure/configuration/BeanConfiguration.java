@@ -1,6 +1,7 @@
 package com.powerup.user.infraestructure.configuration;
 
 import com.powerup.user.domain.api.IUserServicePort;
+import com.powerup.user.domain.exception.UserDoNotExistException;
 import com.powerup.user.domain.spi.IRolePersistencePort;
 import com.powerup.user.domain.spi.IUserPersistencePort;
 import com.powerup.user.domain.usecase.UserUseCase;
@@ -65,7 +66,7 @@ public class BeanConfiguration {
     private Optional<DetailsUser> optionalDetailsUser(String username) {
         Optional<UserEntity> userEntity = userRepository.findByEmail(username);
         if(userEntity.isEmpty()){
-            throw new RuntimeException();
+            throw new UserDoNotExistException();
         }
 
         DetailsUser user = userDetailsMapper.toUser(userEntity.get());
