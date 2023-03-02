@@ -26,13 +26,10 @@ public class UserRestController {
             @ApiResponse(responseCode = "201", description = "User created", content = @Content),
             @ApiResponse(responseCode = "409", description = "USer already exists", content = @Content)
     })
-    @PostMapping("/proprietary/{idRole}")
-    public ResponseEntity<Void> saveUserEntityProprietary(@Validated @RequestBody UserRequest userRequest, @PathVariable Long idRole){
-        if(idRole == 2) {
+    @PostMapping("/proprietary")
+    public ResponseEntity<Void> saveUserEntityProprietary(@Validated @RequestBody UserRequest userRequest){
             userHandler.saveUser(userRequest, 2L);
             return ResponseEntity.status(HttpStatus.CREATED).build();
-        }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
     @Operation(summary = "Add Employee")

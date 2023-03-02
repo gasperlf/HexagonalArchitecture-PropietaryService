@@ -1,36 +1,44 @@
-package com.powerup.user.infraestructure.configuration.security;
+package com.powerup.user.infraestructure.security.aut;
 
-
-import com.powerup.user.infraestructure.out.jpa.entity.UserAuthEntity;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.Collections;
+import java.util.List;
 
-
+@Builder
+@NoArgsConstructor
 @AllArgsConstructor
-public class UserDetailsImpl implements UserDetails {
+@Getter
+@Setter
+public class DetailsUser implements UserDetails {
 
-    private final UserAuthEntity userAuthEntity;
+    private Integer id;
+    private String name;
+    private String lastName;
+    private String phone;
+    private String email;
+    private String password;
+    private String role;
+    private String idDocument;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.emptyList();
+        return List.of(new SimpleGrantedAuthority(role));
     }
 
     @Override
     public String getPassword() {
-        return userAuthEntity.getPassword();
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return userAuthEntity.getEmail();
+        return email;
     }
-
-    public String getIdRole() {return userAuthEntity.getIdRole();}
 
     @Override
     public boolean isAccountNonExpired() {
@@ -50,9 +58,5 @@ public class UserDetailsImpl implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    public String getName(){
-        return userAuthEntity.getName();
     }
 }
