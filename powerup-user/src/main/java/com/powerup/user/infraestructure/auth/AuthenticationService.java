@@ -1,5 +1,6 @@
 package com.powerup.user.infraestructure.auth;
 
+import com.powerup.user.domain.exception.UserDoNotExistException;
 import com.powerup.user.infraestructure.out.jpa.entity.UserEntity;
 import com.powerup.user.infraestructure.out.jpa.repository.IRoleRepository;
 import com.powerup.user.infraestructure.out.jpa.repository.IUserRepository;
@@ -52,7 +53,7 @@ public class AuthenticationService {
     public UserAuthDto getUserAuth(String email) {
         Optional<UserEntity> userEntity = repository.findByEmail(email);
         if(userEntity.isEmpty()){
-            throw new RuntimeException();
+            throw new UserDoNotExistException();
         }
         DetailsUser user = userDetailsMapper.toUser(userEntity.get());
         user.setRole(userEntity.get().getRole().getName());

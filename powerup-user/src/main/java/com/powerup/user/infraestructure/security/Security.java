@@ -28,7 +28,7 @@ public class Security {
                 .authorizeHttpRequests()
 
                 .antMatchers("/api/v1/auth/**").permitAll()
-//                .antMatchers("/swagger-ui/").permitAll()
+                .antMatchers("/swagger-ui/").permitAll()
 
                 .antMatchers("/proprietary").hasAuthority("ADMIN")
 
