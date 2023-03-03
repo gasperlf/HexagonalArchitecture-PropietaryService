@@ -28,11 +28,8 @@ public class UserRestController {
     })
     @PostMapping("/proprietary")
     public ResponseEntity<Void> saveUserEntityProprietary(@Validated @RequestBody UserRequest userRequest){
-//        if(idRole == 2) {
             userHandler.saveUser(userRequest, 2L);
             return ResponseEntity.status(HttpStatus.CREATED).build();
-//        }
-//        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
     @Operation(summary = "Add Employee")

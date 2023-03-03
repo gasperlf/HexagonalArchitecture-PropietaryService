@@ -28,43 +28,8 @@ ext {
 }
 
 dependencies {
-//	annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
-//	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
-//	annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-//
-//	compileOnly "org.projectlombok:lombok:${lombokVersion}"
-//
-//	developmentOnly "org.springframework.boot:spring-boot-devtools:${springBootVersion}"
-//	runtimeOnly 'org.postgresql:postgresql'
-//	implementation 'io.springfox:springfox-swagger2:2.4.0'
-//	implementation 'io.springfox:springfox-swagger-ui:2.4.0'
-//	implementation "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
-//	implementation "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
-//
-//	implementation "org.springdoc:springdoc-openapi-ui:${openApiVersion}"
-//	implementation "org.springdoc:springdoc-openapi-webflux-ui:${openApiVersion}"
-//	implementation "org.springframework.security:spring-security-crypto" // encriptamiento
-//	implementation 'org.hibernate.validator:hibernate-validator:6.2.0.Final'
-//
-//	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:3.1.4' // comsumir micro HTTP
-//	implementation 'io.github.openfeign:feign-okhttp:9.2.0' // conexion micro
-//	implementation "org.springframework.boot:spring-boot-starter-validation:${springBootVersion}"
-//	implementation "org.mapstruct:mapstruct:${mapstructVersion}"
-//
-//	implementation 'org.springframework.boot:spring-boot-starter-security'
-//	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
-//	implementation 'io.jsonwebtoken:jjwt-impl:0.11.5'
-//	implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
-//
-//	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-//	testImplementation 'org.springframework.security:spring-security-test'
-//
-//	implementation 'org.springframework.security:spring-security-core'
-//	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
-//	implementation 'io.jsonwebtoken:jjwt-impl:0.11.5'
-//	implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
-//	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-
+	implementation 'de.gsi.generate:chartfx-generate:11.2.6'
+	implementation 'javax.annotation:javax.annotation-api:1.3.2'
 	annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
 	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 	annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
@@ -72,33 +37,27 @@ dependencies {
 	compileOnly "org.projectlombok:lombok:${lombokVersion}"
 
 	developmentOnly "org.springframework.boot:spring-boot-devtools:${springBootVersion}"
-
+	runtimeOnly 'org.postgresql:postgresql'
+	implementation 'io.springfox:springfox-swagger2:2.4.0'
+	implementation 'io.springfox:springfox-swagger-ui:2.4.0'
 	implementation "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
-	implementation "org.springframework.boot:spring-boot-starter-validation:${springBootVersion}"
 	implementation "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
-	implementation "org.springframework.security:spring-security-crypto"
-	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:3.1.4'
-	implementation 'org.springframework.cloud:spring-cloud-starter-config:3.1.4'
-	implementation 'io.github.openfeign:feign-okhttp:9.2.0'
-	implementation "org.mapstruct:mapstruct:${mapstructVersion}"
 	implementation "org.springdoc:springdoc-openapi-ui:${openApiVersion}"
 	implementation "org.springdoc:springdoc-openapi-webflux-ui:${openApiVersion}"
-	implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap:3.1.4'
+	implementation "org.springframework.security:spring-security-crypto" // encriptamiento
+	implementation 'org.hibernate.validator:hibernate-validator:6.2.0.Final'
+
+	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:3.1.4' // comsumir micro HTTP
+	implementation 'io.github.openfeign:feign-okhttp:9.2.0' // conexion micro
+	implementation "org.springframework.boot:spring-boot-starter-validation:${springBootVersion}"
+	implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
-	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5', 'io.jsonwebtoken:jjwt-jackson:0.11.5'
-	implementation "org.springdoc:springdoc-openapi-ui:${openApiVersion}"
-	implementation "org.springdoc:springdoc-openapi-webflux-ui:${openApiVersion}"
-
+	implementation 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
 
 	testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
-
-	runtimeOnly "org.postgresql:postgresql"
-
-
-
-
-
 
 
 

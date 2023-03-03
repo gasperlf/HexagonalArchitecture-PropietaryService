@@ -16,14 +16,6 @@ import java.util.Optional;
 public class RoleJpaAdapter implements IRolePersistencePort {
     private final IRoleRepository roleRepository;
     private final IRoleMapper roleMapper;
-//    public Role getRole(Long id){
-//        Optional<RoleEntity> roleEntity = roleRepository.findById(id);
-//        Role role = new Role(roleEntity.get().getId(),roleEntity.get().getName(),roleEntity.get().getDescription());
-//        return role;
-//    }
-//    public RoleEntity toRoleEntity(Role role){
-//        return roleMapper.toEntity(role);
-//    }
 
     @Override
     public List<Role> getAllRoles() {

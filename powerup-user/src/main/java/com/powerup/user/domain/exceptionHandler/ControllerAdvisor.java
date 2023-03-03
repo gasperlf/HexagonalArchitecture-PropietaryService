@@ -26,7 +26,7 @@ public class ControllerAdvisor {
     @ExceptionHandler(UserAlreadyExistException.class)
     public ResponseEntity<Map<String, String>> handleNoDataFoundException(
             UserAlreadyExistException ignoredNoDataFoundException) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(Collections.singletonMap(MESSAGE, "User already exists"));
     }
 

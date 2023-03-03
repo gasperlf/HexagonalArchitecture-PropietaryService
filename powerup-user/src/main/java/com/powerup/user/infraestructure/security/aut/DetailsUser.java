@@ -17,12 +17,12 @@ public class DetailsUser implements UserDetails {
 
     private Integer id;
     private String name;
-    private String address;
+    private String lastName;
     private String phone;
     private String email;
     private String password;
     private String role;
-    private String id_document;
+    private String idDocument;
 
 
     @Override

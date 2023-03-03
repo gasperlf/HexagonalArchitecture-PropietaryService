@@ -42,7 +42,7 @@ public class AuthenticationService {
     private Optional<DetailsUser> optionalDetailsUser(String username) {
         Optional<UserEntity> userEntity = repository.findByEmail(username);
         if(userEntity.isEmpty()){
-            throw new RuntimeException();
+            throw new UserDoNotExistException();
         }
         DetailsUser user = userDetailsMapper.toUser(userEntity.get());
         user.setRole(userEntity.get().getRole().getName());

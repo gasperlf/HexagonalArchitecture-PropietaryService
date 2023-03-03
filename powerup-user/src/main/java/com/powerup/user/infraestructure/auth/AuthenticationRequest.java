@@ -1,5 +1,4 @@
 package com.powerup.user.infraestructure.auth;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

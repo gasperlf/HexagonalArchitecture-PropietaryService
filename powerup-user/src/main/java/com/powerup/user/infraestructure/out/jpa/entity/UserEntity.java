@@ -24,7 +24,7 @@ public class UserEntity {
     @Column(name = "name", nullable = false, length = 20)
     private String name;
     @Column(name = "lastname", nullable = false, length = 20)
-    private String lastName;
+    private String lastname;
     @Column(name = "phone", nullable = false, length = 13)
     private String phone;
     @Column(name = "email", nullable = false)

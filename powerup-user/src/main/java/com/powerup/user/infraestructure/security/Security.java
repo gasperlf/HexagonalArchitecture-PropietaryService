@@ -1,8 +1,6 @@
 package com.powerup.user.infraestructure.security;
 
-import com.powerup.user.infraestructure.security.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -26,16 +24,13 @@ public class Security {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
+                .antMatchers( "/api/v1/auth/**","/swagger-ui/**", "/swagger-resources/**",
+                        "/v2/api-docs/**", "/v3/api-docs/**")
+                .permitAll()
+                .antMatchers("/user/proprietary").hasAuthority("ROLE_ADMIN")
 
-                .antMatchers("/api/v1/auth/**").permitAll()
-                .antMatchers("/swagger-ui/").permitAll()
-
-                .antMatchers("/proprietary").hasAuthority("ADMIN")
-
-//                .antMatchers("/api/v1/usuario/restaurante/**").hasAuthority("ROLE_ADMIN")
-//                .antMatchers("/api/v1/usuario/empleado/**").hasAuthority("ROLE_PROPIETARIO")
                 //.antMatchers(HttpMethod.GET, "/api/v1/user/getId/**").hasAnyAuthority("ROLE_Propietario","ROLE_Empleado")
-                //.antMatchers("/api/v1/object/**").hasAuthority("ROLE_Administrador")
+
                 .anyRequest()
                 .authenticated()
                 .and()

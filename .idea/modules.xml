@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/FirstService.iml" filepath="$PROJECT_DIR$/.idea/FirstService.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/PowerUp.main.iml" filepath="$PROJECT_DIR$/.idea/modules/PowerUp.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.PowerUp.PowerUp.main.iml" filepath="$PROJECT_DIR$/.idea/modules/com.PowerUp.PowerUp.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/powerup-user.PowerUp.main.iml" filepath="$PROJECT_DIR$/.idea/modules/powerup-user.PowerUp.main.iml" />
     </modules>
   </component>
 </project>

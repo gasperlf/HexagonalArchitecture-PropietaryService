@@ -2,7 +2,6 @@ package com.powerup.user.infraestructure.security.aut;
 
 import com.powerup.user.infraestructure.auth.UserAuthDto;
 import com.powerup.user.infraestructure.out.jpa.entity.UserEntity;
-import com.powerup.user.infraestructure.security.aut.DetailsUser;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
