@@ -42,7 +42,7 @@ class RoleJpaAdapterTest {
 //    void getRoleById() {
 //        Long id = 5L;
 //        //When
-//        roleJpaAdapter.getRoleById(id);
+//        when(roleJpaAdapter.getRoleById(id));
 //
 //        //Then
 //        verify(roleMapper).toRole(roleRepository.findById(anyLong()).get());

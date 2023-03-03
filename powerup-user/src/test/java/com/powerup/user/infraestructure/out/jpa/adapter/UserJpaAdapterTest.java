@@ -1,6 +1,7 @@
 package com.powerup.user.infraestructure.out.jpa.adapter;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -56,10 +57,11 @@ class UserJpaAdapterTest {
 
 //    @Test
 //    void getUser() {
+//        User user = SaveUserJpaAdapterDataTest.obtainUser();
 //        //When
-//        when(userRepository.findById(5L)).thenReturn(Optional.empty());
+//        when(userRepository.findById(2L)).thenReturn(user);
 //
-//        userJpaAdapter.getUser(2L);
+//        when(userJpaAdapter.getUser(2L)).thenReturn(user);
 //        System.out.println("sigo");
 //        //Then
 //        verify(userMapper).toUser(userRepository.findById(anyLong()).get());

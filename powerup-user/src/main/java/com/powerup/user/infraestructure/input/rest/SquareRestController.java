@@ -21,8 +21,8 @@ public class SquareRestController {
 
     private final IUserRepository userRepository;
 
-    @PostMapping("/restaurant")
-    public ResponseEntity<RestaurantRequest> saveRestaurant(@RequestBody RestaurantRequest restaurantRequest){
+    @PostMapping("/createRestaurant")
+    public ResponseEntity<RestaurantRequest> saveRestaurantEntity(@RequestBody RestaurantRequest restaurantRequest){
         RestaurantRequest restaurant = restaurantClient.saveRestaurant(restaurantRequest).getBody();
 
         return ResponseEntity
@@ -33,17 +33,17 @@ public class SquareRestController {
 
     @PostMapping("/createPlate/")
     public ResponseEntity<PlateRequest> savePlateEntity( @RequestBody PlateRequest plateRequest){
-
+        plateRequest.setIdRestaurant(userRepository.findByEmail(userLoginApplication()).get().getId());
         restaurantClient.savePlate(plateRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-        @PutMapping("/putPlate/")
-        public ResponseEntity<Void> editPlate(@Validated @RequestBody PlateUpdatingRequest plateUpdatingRequest){
-            plateUpdatingRequest.setIdOwner(userRepository.findByEmail(userLoginApplication()).get().getId());
-            restaurantClient.editPlate(plateUpdatingRequest);
-            return ResponseEntity.status(HttpStatus.OK).build();
-        }
+    @PutMapping("/putPlate/")
+    public ResponseEntity<Void> editPlate(@Validated @RequestBody PlateUpdatingRequest plateUpdatingRequest){
+        plateUpdatingRequest.setIdOwner(userRepository.findByEmail(userLoginApplication()).get().getId());
+        restaurantClient.editPlate(plateUpdatingRequest);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 
     public static String userLoginApplication() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -53,5 +53,7 @@ public class SquareRestController {
         }
         return userDetails.getUsername();
     }
+
+
 
 }

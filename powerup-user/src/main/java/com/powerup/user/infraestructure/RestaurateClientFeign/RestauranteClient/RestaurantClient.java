@@ -9,15 +9,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient(name="plazoleta",url = "http://localhost:8282/" ) //configuration = CustomFeignConfig.class)
+@FeignClient(name="plazoleta",url = "http://localhost:8093/" ) //configuration = CustomFeignConfig.class)
 public interface RestaurantClient {
 
-    @RequestMapping(method = RequestMethod.POST, value = "restaurants/createRestaurant/")
+    @RequestMapping(method = RequestMethod.POST, value = "restaurants/createRestaurant")
     public ResponseEntity<RestaurantRequest> saveRestaurant(@RequestBody RestaurantRequest restaurantRequest);
 
-    @RequestMapping(method = RequestMethod.POST, value = "/plates/createPlate/")
+    @RequestMapping(method = RequestMethod.POST, value = "plates/createPlate")
     public ResponseEntity<PlateRequest> savePlate(@RequestBody PlateRequest restaurantRequest);
 
-    @RequestMapping(method = RequestMethod.PUT, value = "plates/putPlate/")
+    @RequestMapping(method = RequestMethod.PUT, value = "plates/putPlate")
     public ResponseEntity<Void> editPlate(@RequestBody PlateUpdatingRequest plateUpdatingRequest);
 }

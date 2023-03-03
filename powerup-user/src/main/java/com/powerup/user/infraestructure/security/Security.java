@@ -24,12 +24,16 @@ public class Security {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
+
+                // Allows to visualize Swagger without authentication
                 .antMatchers( "/api/v1/auth/**","/swagger-ui/**", "/swagger-resources/**",
                         "/v2/api-docs/**", "/v3/api-docs/**")
                 .permitAll()
-                .antMatchers("/user/proprietary").hasAuthority("ROLE_ADMIN")
 
-                //.antMatchers(HttpMethod.GET, "/api/v1/user/getId/**").hasAnyAuthority("ROLE_Propietario","ROLE_Empleado")
+                // Validating permits to access the endpoints
+                .antMatchers("/user/proprietary").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/user/employee").hasAnyAuthority("ROLE_ADMIN","ROLE_PROPRIETARY")
+                .antMatchers("/user/client").hasAnyAuthority("ROLE_ADMIN","ROLE_PROPRIETARY", "ROLE_EMPLOYER")
 
                 .anyRequest()
                 .authenticated()
