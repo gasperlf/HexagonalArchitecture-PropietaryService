@@ -34,7 +34,7 @@ public class UserRestController {
     @Operation(summary = "Add propietary")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User created", content = @Content),
-            @ApiResponse(responseCode = "400", description = "USer already exists", content = @Content)
+            @ApiResponse(responseCode = "400", description = "User already exists", content = @Content)
     })
     @PostMapping("/proprietary")
     public ResponseEntity<Void> saveUserEntityProprietary(@Validated @RequestBody UserRequest userRequest){
@@ -45,7 +45,7 @@ public class UserRestController {
     @Operation(summary = "Add Employee")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User created", content = @Content),
-            @ApiResponse(responseCode = "409", description = "USer already exists", content = @Content)
+            @ApiResponse(responseCode = "400", description = "Employer already exists", content = @Content)
     })
     @PostMapping("/employee")
     public ResponseEntity<Void> saveUserEntityEmployee(@Validated @RequestBody UserRequest userRequest){
@@ -57,7 +57,7 @@ public class UserRestController {
     @Operation(summary = "Add Client")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User created", content = @Content),
-            @ApiResponse(responseCode = "409", description = "USer already exists", content = @Content)
+            @ApiResponse(responseCode = "400", description = "Client already exists", content = @Content)
     })
     @PostMapping("/client")
     public ResponseEntity<Void> saveUserEntityClient(@Validated @RequestBody UserRequest userRequest){
@@ -68,7 +68,7 @@ public class UserRestController {
     @Operation(summary = "Obtain user by id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User created", content = @Content),
-            @ApiResponse(responseCode = "409", description = "USer already exists", content = @Content)
+            @ApiResponse(responseCode = "400", description = "Userid do not already exists", content = @Content)
     })
     @GetMapping("/userById")
     public UserResponse getUserById(@PathVariable Long id){
@@ -76,28 +76,4 @@ public class UserRestController {
         UserResponse userResponse = userHandler.getUser(id);
         return userResponse;
     }
-
-    @PostMapping("/createRestaurant")
-    public ResponseEntity<Void> saveRestaurantEntity(@Validated @RequestBody RestaurantRequest restaurantRequest){
-        return ResponseEntity.status(HttpStatus.CREATED).build();
-    }
-
-    @PostMapping("/createPlate")
-    public ResponseEntity<Void> savePlateEntity(@Validated @RequestBody PlateRequest plateRequest){
-        plateRequest.setIdRestaurant(userRepository.findByEmail(userLoginApplication()).get().getId());
-        restaurantClient.savePlate(plateRequest);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
-    }
-
-    public static String userLoginApplication() {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserDetails userDetails = null;
-        if (principal instanceof UserDetails) {
-            userDetails = (UserDetails) principal;
-        }
-        return userDetails.getUsername();
-    }
-
-
-
 }
