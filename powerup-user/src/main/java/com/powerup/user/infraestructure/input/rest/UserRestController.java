@@ -55,7 +55,6 @@ public class UserRestController {
         userHandler.saveUser(userRequest, 3L);
         UserResponse userResponse = userHandler.getUserByEmail(userRequest.getEmail());
 
-
         // Getting info from token
         token = token.replace("Bearer ", "");
 
@@ -63,21 +62,20 @@ public class UserRestController {
         String[] parts = token.split("\\.");
         Base64.Decoder decoder = Base64.getUrlDecoder();
         String payload = new String(decoder.decode(parts[1]));
+
         //Accessing to the Json String info
         JSONObject jsonObject = new JSONObject(payload);
         String proprietaryEmail = (String) jsonObject.get("sub");
 
         EmployeeRequest employeeRequest = new EmployeeRequest();
-//        employeeRequest.setIdRestaurant(userHandler.getUserByEmail(proprietaryEmail).getId());
-        employeeRequest.setIdRestaurant(userRepository.findByEmail(userLoginApplication()).get().getId());
+
+        employeeRequest.setIdRestaurant(userHandler.getUserByEmail(proprietaryEmail).getId());
         employeeRequest.setField("Employee");
         employeeRequest.setIdUser(userResponse.getId());
-
 
         restaurantClient.saveEmployee(employeeRequest);
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
-
     }
 
     @Operation(summary = "Add Client")
