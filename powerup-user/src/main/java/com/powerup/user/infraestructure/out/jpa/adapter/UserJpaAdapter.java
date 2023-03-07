@@ -1,5 +1,6 @@
 package com.powerup.user.infraestructure.out.jpa.adapter;
 
+import com.powerup.user.domain.exception.EmptyInputException;
 import com.powerup.user.domain.exception.UserAlreadyExistException;
 import com.powerup.user.domain.exception.UserDoNotExistException;
 import com.powerup.user.domain.model.User;
@@ -20,6 +21,8 @@ public class UserJpaAdapter implements IUserPersistencePort {
 
     @Override
     public void saveUser(User user) {
+
+
         if(userRepository.findByEmail(user.getEmail()).isPresent()){
             throw new UserAlreadyExistException();
         }

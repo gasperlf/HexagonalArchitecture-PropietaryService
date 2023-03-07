@@ -1,10 +1,8 @@
 package com.powerup.user.infraestructure.input.rest;
 
-import com.powerup.user.application.dto.PlateRequest;
-import com.powerup.user.application.dto.RestaurantRequest;
-import com.powerup.user.application.dto.UserRequest;
-import com.powerup.user.application.dto.UserResponse;
+import com.powerup.user.application.dto.*;
 import com.powerup.user.application.handler.IUserHandler;
+import com.powerup.user.domain.exception.EmptyInputException;
 import com.powerup.user.infraestructure.RestaurateClientFeign.RestauranteClient.RestaurantClient;
 import com.powerup.user.infraestructure.out.jpa.repository.IUserRepository;
 import io.swagger.v3.oas.annotations.Operation;
@@ -12,6 +10,8 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
+import org.json.JSONObject;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,6 +19,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Base64;
 import java.util.List;
 
 @RestController
@@ -39,7 +40,8 @@ public class UserRestController {
     @PostMapping("/proprietary")
     public ResponseEntity<Void> saveUserEntityProprietary(@Validated @RequestBody UserRequest userRequest){
             userHandler.saveUser(userRequest, 2L);
-            return ResponseEntity.status(HttpStatus.CREATED).build();
+//            return ResponseEntity.status(HttpStatus.CREATED).build();
+        return new ResponseEntity("Message: Proprietary created succesfully",HttpStatus.CREATED);
     }
 
     @Operation(summary = "Add Employee")
@@ -48,9 +50,33 @@ public class UserRestController {
             @ApiResponse(responseCode = "400", description = "Employer already exists", content = @Content)
     })
     @PostMapping("/employee")
-    public ResponseEntity<Void> saveUserEntityEmployee(@Validated @RequestBody UserRequest userRequest){
-                userHandler.saveUser(userRequest, 3L);
-                return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<EmployeeRequest> saveUserEntityEmployee(@Validated @RequestBody UserRequest userRequest,
+                                                       @RequestHeader(HttpHeaders.AUTHORIZATION)String token){
+        userHandler.saveUser(userRequest, 3L);
+        UserResponse userResponse = userHandler.getUserByEmail(userRequest.getEmail());
+
+
+        // Getting info from token
+        token = token.replace("Bearer ", "");
+
+        // Split into 3 parts with . delimiter
+        String[] parts = token.split("\\.");
+        Base64.Decoder decoder = Base64.getUrlDecoder();
+        String payload = new String(decoder.decode(parts[1]));
+        //Accessing to the Json String info
+        JSONObject jsonObject = new JSONObject(payload);
+        String proprietaryEmail = (String) jsonObject.get("sub");
+
+        EmployeeRequest employeeRequest = new EmployeeRequest();
+//        employeeRequest.setIdRestaurant(userHandler.getUserByEmail(proprietaryEmail).getId());
+        employeeRequest.setIdRestaurant(userRepository.findByEmail(userLoginApplication()).get().getId());
+        employeeRequest.setField("Employee");
+        employeeRequest.setIdUser(userResponse.getId());
+
+
+        restaurantClient.saveEmployee(employeeRequest);
+
+        return ResponseEntity.status(HttpStatus.CREATED).build();
 
     }
 
@@ -75,5 +101,14 @@ public class UserRestController {
 
         UserResponse userResponse = userHandler.getUser(id);
         return userResponse;
+    }
+
+    public static String userLoginApplication() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userDetails = null;
+        if (principal instanceof UserDetails) {
+            userDetails = (UserDetails) principal;
+        }
+        return userDetails.getUsername();
     }
 }

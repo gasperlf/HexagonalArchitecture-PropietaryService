@@ -6,6 +6,7 @@ import com.powerup.user.application.handler.IUserHandler;
 import com.powerup.user.application.mapper.IUserRequestMapper;
 import com.powerup.user.application.mapper.IUserResponseMapper;
 import com.powerup.user.domain.api.IUserServicePort;
+import com.powerup.user.domain.exception.EmptyInputException;
 import com.powerup.user.domain.model.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +31,17 @@ public class UserHandler implements IUserHandler {
 
     @Override
     public void saveUser(UserRequest userRequest, Long idRol) {
+//        if(     userRequest.getName().isEmpty() ||
+//                userRequest.getLastName().isEmpty() ||
+//                userRequest.getEmail().isEmpty() ||
+//                userRequest.getPhone().isEmpty() ||
+//                userRequest.getIdDocument().isEmpty() ||
+//                userRequest.getPassword().isEmpty()
+//        ){
+//            throw new EmptyInputException();
+//        }
+
+
         User user = iUserRequestMapper.toUser(userRequest);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         iUserServicePort.saveUser(user, idRol);

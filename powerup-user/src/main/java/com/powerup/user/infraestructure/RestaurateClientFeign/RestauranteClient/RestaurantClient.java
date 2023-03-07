@@ -1,5 +1,6 @@
 package com.powerup.user.infraestructure.RestaurateClientFeign.RestauranteClient;
 
+import com.powerup.user.application.dto.EmployeeRequest;
 import com.powerup.user.application.dto.PlateRequest;
 import com.powerup.user.application.dto.PlateUpdatingRequest;
 import com.powerup.user.application.dto.RestaurantRequest;
@@ -20,4 +21,7 @@ public interface RestaurantClient {
 
     @RequestMapping(method = RequestMethod.PUT, value = "plates/putPlate")
     public ResponseEntity<Void> editPlate(@RequestBody PlateUpdatingRequest plateUpdatingRequest);
+
+    @RequestMapping(method = RequestMethod.POST, value = "employee/createEmployee")
+    public ResponseEntity<EmployeeRequest> saveEmployee(@RequestBody EmployeeRequest employeeRequest);
 }
