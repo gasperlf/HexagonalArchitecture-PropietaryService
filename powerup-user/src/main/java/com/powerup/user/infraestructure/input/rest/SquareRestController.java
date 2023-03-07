@@ -50,6 +50,7 @@ public class SquareRestController {
     public ResponseEntity<Void> editPlateStatus(@RequestBody PlateIsActiveRequest plateIsActiveRequest){
         restaurantClient.editPlateStatus(plateIsActiveRequest);
         return ResponseEntity.status(HttpStatus.OK).build();
+
     }
 
 
