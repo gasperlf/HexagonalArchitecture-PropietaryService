@@ -1,5 +1,6 @@
 package com.powerup.user.infraestructure.input.rest;
 
+import com.powerup.user.application.dto.PlateIsActiveRequest;
 import com.powerup.user.application.dto.PlateRequest;
 import com.powerup.user.application.dto.PlateUpdatingRequest;
 import com.powerup.user.application.dto.RestaurantRequest;
@@ -44,6 +45,13 @@ public class SquareRestController {
         restaurantClient.editPlate(plateUpdatingRequest);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
+
+    @PutMapping("/putActivate")
+    public ResponseEntity<Void> editPlateStatus(@RequestBody PlateIsActiveRequest plateIsActiveRequest){
+        restaurantClient.editPlateStatus(plateIsActiveRequest);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
 
     public static String userLoginApplication() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
