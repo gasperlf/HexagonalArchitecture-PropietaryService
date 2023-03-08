@@ -35,13 +35,15 @@ public class Security {
                 // User microservice
                 .antMatchers("/user/proprietary").hasAuthority("ROLE_ADMIN")
                 .antMatchers("/user/employee").hasAnyAuthority("ROLE_ADMIN","ROLE_PROPRIETARY")
-                .antMatchers("/user/client").hasAnyAuthority("ROLE_ADMIN","ROLE_PROPRIETARY", "ROLE_EMPLOYER")
+                .antMatchers("/user/client**").permitAll()
 
                 // Food restaurants microservices
                 .antMatchers("/square/createRestaurant").hasAnyAuthority("ROLE_ADMIN","ROLE_PROPRIETARY")
                 .antMatchers("/square/createPlate").hasAnyAuthority("ROLE_ADMIN","ROLE_PROPRIETARY")
                 .antMatchers("/square/putPlate").hasAnyAuthority("ROLE_ADMIN","ROLE_PROPRIETARY")
                 .antMatchers("/square/putActivate").hasAnyAuthority("ROLE_ADMIN","ROLE_PROPRIETARY")
+
+
 
                 .anyRequest()
                 .authenticated()

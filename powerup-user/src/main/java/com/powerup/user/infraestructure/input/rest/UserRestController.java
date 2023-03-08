@@ -40,7 +40,6 @@ public class UserRestController {
     @PostMapping("/proprietary")
     public ResponseEntity<Void> saveUserEntityProprietary(@Validated @RequestBody UserRequest userRequest){
             userHandler.saveUser(userRequest, 2L);
-//            return ResponseEntity.status(HttpStatus.CREATED).build();
         return new ResponseEntity("Message: Proprietary created succesfully",HttpStatus.CREATED);
     }
 
@@ -69,7 +68,7 @@ public class UserRestController {
 
         EmployeeRequest employeeRequest = new EmployeeRequest();
 
-        employeeRequest.setIdRestaurant(userHandler.getUserByEmail(proprietaryEmail).getId());
+        employeeRequest.setIdOwner(userHandler.getUserByEmail(proprietaryEmail).getId());
         employeeRequest.setField("Employee");
         employeeRequest.setIdUser(userResponse.getId());
 
