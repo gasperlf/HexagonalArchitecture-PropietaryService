@@ -42,6 +42,8 @@ public class Security {
                 .antMatchers("/square/createPlate").hasAnyAuthority("ROLE_ADMIN","ROLE_PROPRIETARY")
                 .antMatchers("/square/putPlate").hasAnyAuthority("ROLE_ADMIN","ROLE_PROPRIETARY")
                 .antMatchers("/square/putActivate").hasAnyAuthority("ROLE_ADMIN","ROLE_PROPRIETARY")
+                .antMatchers("/square/allRestaurants**").permitAll()
+                .antMatchers("/square/allPlates**").permitAll()
 
 
 

@@ -1,9 +1,9 @@
 package com.powerup.user.infraestructure.input.rest;
 
-import com.powerup.user.application.dto.PlateIsActiveRequest;
-import com.powerup.user.application.dto.PlateRequest;
-import com.powerup.user.application.dto.PlateUpdatingRequest;
-import com.powerup.user.application.dto.RestaurantRequest;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.powerup.user.application.dto.*;
 import com.powerup.user.infraestructure.RestaurateClientFeign.RestauranteClient.RestaurantClient;
 import com.powerup.user.infraestructure.out.jpa.repository.IUserRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +13,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/square")
@@ -26,11 +28,8 @@ public class SquareRestController {
     public ResponseEntity<RestaurantRequest> saveRestaurantEntity(@RequestBody RestaurantRequest restaurantRequest){
         RestaurantRequest restaurant = restaurantClient.saveRestaurant(restaurantRequest).getBody();
 
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(restaurantRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body(restaurant);
     }
-
 
     @PostMapping("/createPlate/")
     public ResponseEntity<PlateRequest> savePlateEntity( @RequestBody PlateRequest plateRequest){
@@ -50,8 +49,15 @@ public class SquareRestController {
     public ResponseEntity<Void> editPlateStatus(@RequestBody PlateIsActiveRequest plateIsActiveRequest){
         restaurantClient.editPlateStatus(plateIsActiveRequest);
         return ResponseEntity.status(HttpStatus.OK).build();
-
     }
+
+    @PostMapping("/allRestaurants")
+    public ResponseEntity<List<RestaurantResponse>> getAllRestaurant(@RequestBody RestaurantListRequest restaurantListRequest){
+        return restaurantClient.getAllRestaurant(restaurantListRequest);
+    }
+
+//    @PostMapping("/allPlates")
+//    public ResponseEntity<List<PlateResponse>>
 
 
     public static String userLoginApplication() {

@@ -16,9 +16,7 @@ public interface IUserResponseMapper {
     @Mappings({
             @Mapping(target="name", source="name"),
             @Mapping(target="lastName", source="lastName"),
-            @Mapping(target="phone", source="phone"),
-            @Mapping(target="email", source="email"),
-            @Mapping(target="role", source="role")
+            @Mapping(target="email", source="email")
     })
     UserResponse toUserResponse(User user);
     List<UserResponse> toUserResponse(List<User> user);
