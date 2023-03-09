@@ -40,10 +40,10 @@ class UserHandlerTest {
 
 
     @Test
-    void saveUser() {
+    void saveProprietaryUser() {
 
         // Given
-        User user = SaveHandlerDataTest.obtainUser();
+        User user = SaveHandlerDataTest.obtainProprietaryUser();
         UserRequest userRequest = SaveHandlerDataTest.obtainUserRequest();
         Long idRol = 2L;
 
@@ -58,9 +58,45 @@ class UserHandlerTest {
     }
 
     @Test
+    void saveEmployeeUser() {
+
+        // Given
+        User user = SaveHandlerDataTest.obtainEmployeeUser();
+        UserRequest userRequest = SaveHandlerDataTest.obtainUserRequest();
+        Long idRol = 3L;
+
+        // When
+        when(iUserRequestMapper.toUser(any())).thenReturn(user);
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userHandler.saveUser(userRequest, idRol);
+
+        // Then
+        verify(iUserServicePort).saveUser(user,idRol);
+    }
+
+    @Test
+    void saveClientUser() {
+
+        // Given
+        User user = SaveHandlerDataTest.obtainClientUser();
+        UserRequest userRequest = SaveHandlerDataTest.obtainUserRequest();
+        Long idRol = 4L;
+
+        // When
+        when(iUserRequestMapper.toUser(any())).thenReturn(user);
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userHandler.saveUser(userRequest, idRol);
+
+        // Then
+        verify(iUserServicePort).saveUser(user,idRol);
+    }
+
+    @Test
     void getUser() {
         // Given
-        User user = SaveHandlerDataTest.obtainUser();
+        User user = SaveHandlerDataTest.obtainProprietaryUser();
         UserResponse userResponse = SaveHandlerDataTest.obtainUserResponse();
 
         // When
