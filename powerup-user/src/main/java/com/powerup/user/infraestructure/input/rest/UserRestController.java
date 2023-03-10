@@ -40,7 +40,7 @@ public class UserRestController {
     @PostMapping("/proprietary")
     public ResponseEntity<Void> saveUserEntityProprietary(@Validated @RequestBody UserRequest userRequest){
             userHandler.saveUser(userRequest, 2L);
-        return new ResponseEntity("Message: Proprietary created succesfully",HttpStatus.CREATED);
+        return new ResponseEntity("Created: new proprietary",HttpStatus.CREATED);
     }
 
     @Operation(summary = "Add Employee")

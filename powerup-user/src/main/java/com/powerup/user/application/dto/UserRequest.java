@@ -15,20 +15,20 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 public class UserRequest {
-    @NotBlank(message = "El campo nombre es obligatorio")
+    @NotBlank(message = "The field name is mandatory")
     private String name;
-    @NotBlank(message = "El campo apellido es obligatorio")
+    @NotBlank(message = "The field lastName is mandatory")
     private String lastName;
-    @NotBlank(message = "El campo documento es obligatorio")
+    @NotBlank(message = "The field idDocument is mandatory")
     @Pattern(regexp = "^[0-9]*$", message = "debe ser numerico")
     @Size(min = 5, max=11, message = "no es valida")
     private String idDocument;
-    @NotBlank(message = "El campo celular es obligatorio")
+    @NotBlank(message = "The field phone is mandatory")
     @Pattern(regexp = "^(\\+57)?3\\d{9}$")
     private String phone;
-    @NotBlank(message = "El campo correo es obligatorio")
+    @NotBlank(message = "The field email is mandatory")
     @Email(message = "El correo electrónico no es válido")
     private String email;
-    @NotBlank(message = "El campo contraseña es obligatorio")
+    @NotBlank(message = "The field password is mandatory")
     private String password;
 }
