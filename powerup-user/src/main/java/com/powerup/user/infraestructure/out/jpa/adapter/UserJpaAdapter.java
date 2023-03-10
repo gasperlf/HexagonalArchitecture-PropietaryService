@@ -21,8 +21,6 @@ public class UserJpaAdapter implements IUserPersistencePort {
 
     @Override
     public void saveUser(User user) {
-
-
         if(userRepository.findByEmail(user.getEmail()).isPresent()){
             throw new UserAlreadyExistException();
         }

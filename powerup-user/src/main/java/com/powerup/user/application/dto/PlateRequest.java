@@ -9,10 +9,10 @@ import javax.validation.constraints.NotBlank;
 @Setter
 public class PlateRequest {
 
-    @NotBlank
+    @NotBlank(message = "The field name is mandatory")
     private String name;
     private Long idCategory;
-    @NotBlank
+    @NotBlank(message = "The field description is mandatory")
     private String description;
     private Long price;
     private Long idRestaurant;

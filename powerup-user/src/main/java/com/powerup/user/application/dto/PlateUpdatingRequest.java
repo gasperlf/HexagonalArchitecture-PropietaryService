@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank;
 @Setter
 public class PlateUpdatingRequest {
     private Long id;
-    @NotBlank
+    @NotBlank(message = "The field description is mandatory")
     private String description;
     private Long price;
     private Long idOwner;

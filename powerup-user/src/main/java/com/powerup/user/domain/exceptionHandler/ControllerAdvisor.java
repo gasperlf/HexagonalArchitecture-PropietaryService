@@ -5,6 +5,7 @@ import com.powerup.user.domain.exception.RestaurantAlreadyExistsException;
 import com.powerup.user.domain.exception.UserAlreadyExistException;
 import com.powerup.user.domain.exception.UserDoNotExistException;
 
+import feign.FeignException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +13,9 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -61,6 +64,12 @@ public class ControllerAdvisor {
             RestaurantAlreadyExistsException ignoredNoDataFoundException) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(Collections.singletonMap(MESSAGE, "Restaurant already exists"));
+    }
+
+    @ExceptionHandler(FeignException.class)
+    public String handleFeignStatusException(FeignException e, HttpServletResponse response) {
+        response.setStatus(e.status());
+        return "feignError";
     }
 
 }
