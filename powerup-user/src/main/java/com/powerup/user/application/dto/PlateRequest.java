@@ -2,6 +2,7 @@ package com.powerup.user.application.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.URL;
 
 import javax.validation.constraints.NotBlank;
 
@@ -9,13 +10,15 @@ import javax.validation.constraints.NotBlank;
 @Setter
 public class PlateRequest {
 
-    @NotBlank(message = "The field name is mandatory")
+    @NotBlank
     private String name;
     private Long idCategory;
-    @NotBlank(message = "The field description is mandatory")
+    @NotBlank
     private String description;
     private Long price;
     private Long idRestaurant;
+    @NotBlank
+    @URL(message = "must be a url")
     private String urlImage;
 
 }

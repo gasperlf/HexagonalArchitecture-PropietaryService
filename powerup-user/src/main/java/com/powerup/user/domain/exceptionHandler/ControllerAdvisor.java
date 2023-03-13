@@ -66,10 +66,5 @@ public class ControllerAdvisor {
                 .body(Collections.singletonMap(MESSAGE, "Restaurant already exists"));
     }
 
-    @ExceptionHandler(FeignException.class)
-    public String handleFeignStatusException(FeignException e, HttpServletResponse response) {
-        response.setStatus(e.status());
-        return "feignError";
-    }
 
 }

@@ -57,14 +57,13 @@ public class SquareRestController {
         return ResponseEntity.status(HttpStatus.CREATED).body(restaurant);
     }
 
-    @PostMapping("/createPlate/")
+    @PostMapping("/createPlate")
     public ResponseEntity<PlateRequest> savePlateEntity( @RequestBody PlateRequest plateRequest){
-        plateRequest.setIdRestaurant(userRepository.findByEmail(userLoginApplication()).get().getId());
         restaurantClient.savePlate(plateRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @PutMapping("/putPlate/")
+    @PutMapping("/putPlate")
     public ResponseEntity<Void> editPlate(@Validated @RequestBody PlateUpdatingRequest plateUpdatingRequest){
         plateUpdatingRequest.setIdOwner(userRepository.findByEmail(userLoginApplication()).get().getId());
         restaurantClient.editPlate(plateUpdatingRequest);

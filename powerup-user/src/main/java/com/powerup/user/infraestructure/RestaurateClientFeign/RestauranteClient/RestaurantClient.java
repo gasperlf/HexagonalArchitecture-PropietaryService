@@ -16,7 +16,7 @@ public interface RestaurantClient {
     public ResponseEntity<RestaurantRequest> saveRestaurant(@RequestBody RestaurantRequest restaurantRequest);
 
     @RequestMapping(method = RequestMethod.POST, value = "plates/createPlate")
-    public ResponseEntity<PlateRequest> savePlate(@RequestBody PlateRequest restaurantRequest);
+    public ResponseEntity<PlateRequest> savePlate(@RequestBody PlateRequest plateRequest);
 
     @RequestMapping(method = RequestMethod.PUT, value = "plates/putPlate")
     public ResponseEntity<Void> editPlate(@RequestBody PlateUpdatingRequest plateUpdatingRequest);
