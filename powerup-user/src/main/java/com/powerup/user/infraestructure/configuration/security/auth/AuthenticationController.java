@@ -1,4 +1,6 @@
-package com.powerup.user.infraestructure.auth;
+package com.powerup.user.infraestructure.configuration.security.auth;
+import com.powerup.user.infraestructure.configuration.security.auth.dto.AuthenticationResponse;
+import com.powerup.user.infraestructure.configuration.security.auth.dto.AuthenticationRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +14,7 @@ public class AuthenticationController {
 
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(
-            @RequestBody AuthenticationRequest request
+                @RequestBody AuthenticationRequest request
     ) {
         return ResponseEntity.ok(service.authenticate(request));
     }

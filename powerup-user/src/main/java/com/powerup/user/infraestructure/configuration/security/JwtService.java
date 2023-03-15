@@ -1,4 +1,4 @@
-package com.powerup.user.infraestructure.security;
+package com.powerup.user.infraestructure.configuration.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

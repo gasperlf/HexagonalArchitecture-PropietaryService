@@ -31,17 +31,6 @@ public class UserHandler implements IUserHandler {
 
     @Override
     public void saveUser(UserRequest userRequest, Long idRol) {
-//        if(     userRequest.getName().isEmpty() ||
-//                userRequest.getLastName().isEmpty() ||
-//                userRequest.getEmail().isEmpty() ||
-//                userRequest.getPhone().isEmpty() ||
-//                userRequest.getIdDocument().isEmpty() ||
-//                userRequest.getPassword().isEmpty()
-//        ){
-//            throw new EmptyInputException();
-//        }
-
-
         User user = iUserRequestMapper.toUser(userRequest);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         iUserServicePort.saveUser(user, idRol);

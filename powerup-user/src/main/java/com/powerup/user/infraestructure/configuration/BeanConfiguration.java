@@ -13,8 +13,8 @@ import com.powerup.user.infraestructure.out.jpa.mapper.IUserMapper;
 import com.powerup.user.infraestructure.out.jpa.repository.IRoleRepository;
 import com.powerup.user.infraestructure.out.jpa.repository.IUserRepository;
 
-import com.powerup.user.infraestructure.security.aut.DetailsUser;
-import com.powerup.user.infraestructure.security.aut.IUserDetailsMapper;
+import com.powerup.user.infraestructure.configuration.security.aut.DetailsUser;
+import com.powerup.user.infraestructure.configuration.security.aut.IUserDetailsMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

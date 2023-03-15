@@ -1,4 +1,4 @@
-package com.powerup.user.infraestructure.security;
+package com.powerup.user.infraestructure.configuration.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
