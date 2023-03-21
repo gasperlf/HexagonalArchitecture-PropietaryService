@@ -32,17 +32,17 @@ public class Security {
                 // Validating permits to access the endpoints
 
                 // User microservice
-                .antMatchers("/user/proprietary").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/user/proprietary", "/api/user/proprietary").hasAuthority("ROLE_ADMIN")
                 .antMatchers("/user/employee").hasAnyAuthority("ROLE_ADMIN","ROLE_PROPRIETARY")
-                .antMatchers("/user/client**").permitAll()
+                .antMatchers("/user/client**", "/user/email/**").permitAll()
 
                 // Food restaurants microservices
-                .antMatchers("/square/createRestaurant").hasAnyAuthority("ROLE_ADMIN","ROLE_PROPRIETARY")
-                .antMatchers("/square/createPlate").hasAnyAuthority("ROLE_ADMIN","ROLE_PROPRIETARY")
-                .antMatchers("/square/putPlate").hasAnyAuthority("ROLE_ADMIN","ROLE_PROPRIETARY")
-                .antMatchers("/square/putActivate").hasAnyAuthority("ROLE_ADMIN","ROLE_PROPRIETARY")
-                .antMatchers("/square/allRestaurants**").permitAll()
-                .antMatchers("/square/allPlates**").permitAll()
+//                .antMatchers("/square/createRestaurant").hasAnyAuthority("ROLE_ADMIN","ROLE_PROPRIETARY")
+//                .antMatchers("/square/createPlate").hasAnyAuthority("ROLE_ADMIN","ROLE_PROPRIETARY")
+//                .antMatchers("/square/putPlate").hasAnyAuthority("ROLE_ADMIN","ROLE_PROPRIETARY")
+//                .antMatchers("/square/putActivate").hasAnyAuthority("ROLE_ADMIN","ROLE_PROPRIETARY")
+//                .antMatchers("/square/allRestaurants**").permitAll()
+//                .antMatchers("/square/allPlates**").permitAll()
 
 
 

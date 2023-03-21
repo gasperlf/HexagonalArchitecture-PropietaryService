@@ -9,8 +9,10 @@ import lombok.Setter;
 public class UserResponse {
     private Long id;
     private String name;
-
     private String lastName;
+    private String phone;
     private String email;
+    private Role role;
+    private String idDocument;
 
 }

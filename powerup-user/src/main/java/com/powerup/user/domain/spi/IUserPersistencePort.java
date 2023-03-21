@@ -6,7 +6,7 @@ import java.util.List;
 
 
 public interface IUserPersistencePort {
-    void saveUser(User user);
+    User saveUser(User user);
     User getUser(Long id);
     User getUserByEmail(String email);
     boolean existsByEmail(String email);

@@ -19,6 +19,7 @@ public interface IUserMapper {
             @Mapping(target="name", source="name"),
             @Mapping(target="lastname", source="lastName"),
             @Mapping(target="idDocument", source="idDocument"),
+            @Mapping(target="role", source="role"),
             @Mapping(target="phone", source="phone"),
             @Mapping(target="email", source="email"),
             @Mapping(target="password", source="password")

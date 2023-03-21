@@ -6,7 +6,7 @@ import java.util.List;
 
 
 public interface IUserServicePort {
-    void saveUser(User user, Long idRol);
+    User saveUser(User user, Long idRol);
     User getUser(Long id);
     User getUserByEmail(String email);
     boolean existByEmail(String email);

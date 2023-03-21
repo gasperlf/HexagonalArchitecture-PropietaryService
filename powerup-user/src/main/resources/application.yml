@@ -1,7 +1,6 @@
-
 spring:
+  name: user-service
   jpa:
-
     generate-ddl: 'true'
     database: POSTGRESQL
     properties:

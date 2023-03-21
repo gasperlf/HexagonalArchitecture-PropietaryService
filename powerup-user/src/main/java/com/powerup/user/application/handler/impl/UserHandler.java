@@ -30,10 +30,10 @@ public class UserHandler implements IUserHandler {
     }
 
     @Override
-    public void saveUser(UserRequest userRequest, Long idRol) {
+    public UserResponse saveUser(UserRequest userRequest, Long idRol) {
         User user = iUserRequestMapper.toUser(userRequest);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        iUserServicePort.saveUser(user, idRol);
+        return iUserResponseMapper.toUserResponse(iUserServicePort.saveUser(user, idRol));
     }
 
     @Override

@@ -40,7 +40,9 @@ public class UserRestController {
     @PostMapping("/proprietary")
     public ResponseEntity<Void> saveUserEntityProprietary(@Validated @RequestBody UserRequest userRequest){
             userHandler.saveUser(userRequest, 2L);
-        return new ResponseEntity("Created: new proprietary",HttpStatus.CREATED);
+//        return new ResponseEntity("Created: new proprietary",HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+
     }
 
     @Operation(summary = "Add Employee")
@@ -49,32 +51,9 @@ public class UserRestController {
             @ApiResponse(responseCode = "400", description = "Employer already exists", content = @Content)
     })
     @PostMapping("/employee")
-    public ResponseEntity<EmployeeRequest> saveUserEntityEmployee(@Validated @RequestBody UserRequest userRequest,
-                                                       @RequestHeader(HttpHeaders.AUTHORIZATION)String token){
-        userHandler.saveUser(userRequest, 3L);
-        UserResponse userResponse = userHandler.getUserByEmail(userRequest.getEmail());
+    public ResponseEntity<UserResponse> saveUserEntityEmployee(@Validated @RequestBody UserRequest userRequest){
 
-        // Getting info from token
-        token = token.replace("Bearer ", "");
-
-        // Split into 3 parts with . delimiter
-        String[] parts = token.split("\\.");
-        Base64.Decoder decoder = Base64.getUrlDecoder();
-        String payload = new String(decoder.decode(parts[1]));
-
-        //Accessing to the Json String info
-        JSONObject jsonObject = new JSONObject(payload);
-        String proprietaryEmail = (String) jsonObject.get("sub");
-
-        EmployeeRequest employeeRequest = new EmployeeRequest();
-
-        employeeRequest.setIdOwner(userHandler.getUserByEmail(proprietaryEmail).getId());
-        employeeRequest.setField("Employee");
-        employeeRequest.setIdUser(userResponse.getId());
-
-        restaurantClient.saveEmployee(employeeRequest);
-
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.OK).body(userHandler.saveUser(userRequest, 3L));
     }
 
     @Operation(summary = "Add Client")
@@ -88,24 +67,24 @@ public class UserRestController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @Operation(summary = "Obtain user by id")
+    @Operation(summary = "Find user by email")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "User created", content = @Content),
-            @ApiResponse(responseCode = "400", description = "Userid do not already exists", content = @Content)
+            @ApiResponse(responseCode = "302", description = "User found", content = @Content),
+            @ApiResponse(responseCode = "404", description = "User don't exists", content = @Content),
+            @ApiResponse(responseCode = "400", description = "bad request", content = @Content),
+            @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
-    @GetMapping("/userById")
-    public UserResponse getUserById(@PathVariable Long id){
-
-        UserResponse userResponse = userHandler.getUser(id);
-        return userResponse;
+    @PostMapping("/email/{email}")
+    public UserResponse getUserByEmail(@PathVariable String email){
+        return userHandler.getUserByEmail(email);
     }
 
-    public static String userLoginApplication() {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserDetails userDetails = null;
-        if (principal instanceof UserDetails) {
-            userDetails = (UserDetails) principal;
-        }
-        return userDetails.getUsername();
-    }
+//    public static String userLoginApplication() {
+//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        UserDetails userDetails = null;
+//        if (principal instanceof UserDetails) {
+//            userDetails = (UserDetails) principal;
+//        }
+//        return userDetails.getUsername();
+//    }
 }

@@ -15,10 +15,10 @@ public class UserUseCase implements IUserServicePort {
         this.rolePersistencePort = rolePersistencePort;
     }
     @Override
-    public void saveUser(User user, Long idRol) {
+    public User saveUser(User user, Long idRol) {
         user.setRole(rolePersistencePort.getRoleById(idRol));
         user.setId(-1L);
-        userPersistencePort.saveUser(user);
+        return userPersistencePort.saveUser(user);
     }
     @Override
     public User getUser(Long id) {
