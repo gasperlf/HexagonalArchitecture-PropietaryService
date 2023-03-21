@@ -3,7 +3,6 @@ package com.powerup.user.infraestructure.input.rest;
 import com.powerup.user.application.dto.*;
 import com.powerup.user.application.handler.IUserHandler;
 import com.powerup.user.domain.exception.EmptyInputException;
-import com.powerup.user.infraestructure.RestaurateClientFeign.RestauranteClient.RestaurantClient;
 import com.powerup.user.infraestructure.out.jpa.repository.IUserRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -27,8 +26,6 @@ import java.util.List;
 @RequiredArgsConstructor
 
 public class UserRestController {
-
-    private final RestaurantClient restaurantClient;
 
     private final IUserRepository userRepository;
     private final IUserHandler userHandler;
@@ -79,12 +76,4 @@ public class UserRestController {
         return userHandler.getUserByEmail(email);
     }
 
-//    public static String userLoginApplication() {
-//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        UserDetails userDetails = null;
-//        if (principal instanceof UserDetails) {
-//            userDetails = (UserDetails) principal;
-//        }
-//        return userDetails.getUsername();
-//    }
 }
