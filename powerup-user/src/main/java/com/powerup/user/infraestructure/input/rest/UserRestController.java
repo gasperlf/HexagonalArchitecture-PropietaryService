@@ -32,7 +32,7 @@ public class UserRestController {
     @Operation(summary = "Add propietary")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User created", content = @Content),
-            @ApiResponse(responseCode = "400", description = "User already exists", content = @Content)
+            @ApiResponse(responseCode = "400", description = "Bad request", content = @Content)
     })
     @PostMapping("/proprietary")
     public ResponseEntity<Void> saveUserEntityProprietary(@Validated @RequestBody UserRequest userRequest){
@@ -45,7 +45,7 @@ public class UserRestController {
     @Operation(summary = "Add Employee")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User created", content = @Content),
-            @ApiResponse(responseCode = "400", description = "Employer already exists", content = @Content)
+            @ApiResponse(responseCode = "400", description = "Bad request", content = @Content)
     })
     @PostMapping("/employee")
     public ResponseEntity<UserResponse> saveUserEntityEmployee(@Validated @RequestBody UserRequest userRequest){
@@ -56,7 +56,7 @@ public class UserRestController {
     @Operation(summary = "Add Client")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User created", content = @Content),
-            @ApiResponse(responseCode = "400", description = "Client already exists", content = @Content)
+            @ApiResponse(responseCode = "400", description = "Bad request", content = @Content)
     })
     @PostMapping("/client")
     public ResponseEntity<Void> saveUserEntityClient(@Validated @RequestBody UserRequest userRequest){
